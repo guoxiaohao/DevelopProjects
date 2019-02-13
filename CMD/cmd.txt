@@ -1,3 +1,8 @@
+boost:
+bootstrapÉú³Éb2 bjam
+b2 stage --without-python link=static threading=multi runtime-link=static debug
+
+
 cmake:
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 cmake -DCMAKE_BUILD_TYPE=Debug -DXXX=ON .. -G"Visual Studio 14 2015 Win64"
