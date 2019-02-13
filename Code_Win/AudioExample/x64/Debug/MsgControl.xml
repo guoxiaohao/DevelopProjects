@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<doucument>
+	<!--Ö÷³ÌÐò-->
+	<Part Name = "InfoMap">
+		<Message Name="0101">
+			Insert UDisk
+		</Message>
+		<Message Name="0102">
+			Insert Serial
+		</Message>
+		<Message Name="0103">
+			Insert Speaker
+		</Message>
+		<Message Name="0104">
+			Insert JoyStick
+		</Message>
+		<Message Name="0201">
+			Remove UDisk
+		</Message>
+		<Message Name="0202">
+			Remove Serial
+		</Message>
+		<Message Name="0203">
+			Remove Speaker
+		</Message>
+		<Message Name="0204">
+			Remove JoyStick
+		</Message>
+	</Part>
+</doucument>
