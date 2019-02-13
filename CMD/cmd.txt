@@ -1,0 +1,13 @@
+cmake:
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+cmake -DCMAKE_BUILD_TYPE=Debug -DXXX=ON .. -G"Visual Studio 14 2015 Win64"
+
+MinGW:
+mingw32-make
+
+Win SC:
+sc create SerExample binPath= E:\GitDirect\MyProject\Win32SerExample\SerExample\Debug\SerExample.exe
+sc config SerExample start=  AUTO
+sc start SerExample
+sc delete SerExample
+pause
