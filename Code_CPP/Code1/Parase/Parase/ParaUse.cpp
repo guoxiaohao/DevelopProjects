@@ -1,19 +1,24 @@
-#include "pch.h"
+﻿#include "pch.h"
+
 #include "ParaUse.h"
-
-
+#include "string.h"
 
 CParaUse::CParaUse()
 {
-	std::cout << "Construct" << std::endl;
 }
 
 CParaUse::~CParaUse()
 {
-	std::cout << "Deconstruct" << std::endl;
 }
 
-int CParaUse::ParaString(const std::string & StrPara)
+bool CParaUse::Parase(char* szPar, float &fRet)
+{
+	std::string StrUse = szPar;
+
+	return Parase(StrUse, fRet);
+}
+
+bool CParaUse::Parase(const std::string & StrPara, float &fRet)
 {
 	while (!m_StackFloat.empty())
 	{
@@ -77,9 +82,9 @@ int CParaUse::ParaString(const std::string & StrPara)
 		m_StackFloat.push(m_value1);
 	}
 	
-	float val = m_StackFloat.top();
+	fRet = m_StackFloat.top();
 	m_StackFloat.pop();
-	return (int)val;
+	return true;
 }
 
 void CParaUse::TransferToContent(const std::string & StrPara)
@@ -87,7 +92,7 @@ void CParaUse::TransferToContent(const std::string & StrPara)
 	memset(szContent, 0, sizeof(szContent));
 	char szTemp[255] = {0};
 	strcpy(szTemp, StrPara.c_str());
-	for (size_t i = 0, j = 0; i < strlen(szTemp); i++)
+	for (int i = 0, j = 0; i < strlen(szTemp); i++)
 	{
 		if (isRightChar(szTemp[i]))
 		{
@@ -193,20 +198,15 @@ bool CParaUse::ComparePrev(char ch1, char ch2)
 
 float CParaUse::CalculateValue(float val1, float val2, char chs)
 {
-	if (chs == '*')
+	switch (chs)
 	{
+	case '*':
 		return val2 * val1;
-	}
-	if (chs == '/')
-	{
+	case '/':
 		return val2 / val1;
-	}
-	if (chs == '+')
-	{
+	case '+':
 		return val2 + val1;
-	}
-	if (chs == '-')
-	{
+	default:
 		return val2 - val1;
 	}
 }

@@ -1,6 +1,9 @@
+ubuntu deb:
+sudo dpkg -i XXXX
+
 boost:
-bootstrapÉú³Éb2 bjam
-b2 stage --without-python link=static threading=multi runtime-link=static debug
+Execuae bootstrap generate b2 or bjam
+b2 stage --without-python --stagedir="./stageOutputLibs" threading=multi link=static runtime-link=shared debug
 
 
 cmake:

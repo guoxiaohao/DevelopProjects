@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <stack>
@@ -9,7 +9,8 @@ public:
 	CParaUse();
 	~CParaUse();
 public:
-	int ParaString(const std::string & StrPara);
+	bool Parase(const std::string & StrPara, float &fRet);
+	bool Parase(char* szPar, float &fRet);
 private:
 	void TransferToContent(const std::string & StrPara);
 	bool isRightChar(char ch);
