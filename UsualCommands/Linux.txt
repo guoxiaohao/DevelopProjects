@@ -1,0 +1,20 @@
+ubuntu install£º
+1 deb file:
+sudo dpkg -i XXXX
+2 network command:
+sudo apt-get update
+sudo apt-get install build-essential
+
+cmake install ubuntu: 
+1 tar -xzvf
+2 ./bootstrap
+3 make
+4 sudo make install
+
+gdb install ubuntu:
+1 termcap
+2 ncurses
+3 gdb
+  3.1 ./configure
+  3.2 make
+  3.3 sudo make install
