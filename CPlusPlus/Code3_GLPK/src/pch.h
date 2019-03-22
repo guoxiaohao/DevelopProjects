@@ -10,7 +10,4 @@
 #include <memory>
 #include <thread>
 
-extern "C"
-{
 #include "glpk.h"
-}

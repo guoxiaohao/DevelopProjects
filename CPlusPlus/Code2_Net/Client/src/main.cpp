@@ -16,17 +16,18 @@ int main(int argc, char** argv)
     
     switch (nTypes)
     {
-        case 1:
+        case '1':
             {
-
+                ClientSyncBoost cli;
+                std::thread threadCli(&ClientSyncBoost::Connect, &cli, std::ref(nPort), std::ref(strIp));
+                threadCli.join();
             }
             break;
         default:
             {
                 ClientSync cli;
-                std::thread threadCi(&ClientSync::Connect, 
-                    &cli, nPort, strIp);
-                threadCi.join(); 
+                std::thread threadCli(&ClientSync::Connect, &cli, std::ref(nPort), std::ref(strIp));
+                threadCli.join(); 
             }
             break;
     }

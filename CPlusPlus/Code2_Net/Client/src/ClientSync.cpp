@@ -23,33 +23,24 @@ void ClientSync::Connect(const uint32_t& nPort, const std::string& strIp)
     int socketSend = socket(AF_INET, SOCK_STREAM, 0);
     if(socketSend<0)
     {
-        std::cout << "Wrong - Client Init Socket" << std::endl;
+        std::cout << "Wrong - ClientSync Init Socket" << std::endl;
         return;
     }
 
     while(connect(socketSend, (struct sockaddr*)&addrSend, sizeof(addrSend))!=0);
-    std::cout << "Right - Client Connect " << std::endl;
+    std::cout << "Right - ClientSync Connect " << std::endl;
 
     int i = 0;
     while(true)
     {
         char szSendBuf[255] = {0};
-        sprintf(szSendBuf, "%s_%d", "Send", i);
-        int nRet = send(socketSend, szSendBuf, strlen(szSendBuf)+1, 0);
-
-        if(nRet<0)
-        {
-            std::cout << "Wrong " << szSendBuf << std::endl;
-            break;
-        }
-        else
-        {
-            std::cout<< "Right " << szSendBuf << std::endl;
-        }
+        sprintf(szSendBuf, "%s_%d", "ClientSyncSend", i);
+        send(socketSend, szSendBuf, strlen(szSendBuf)+1, 0);
+        std::cout<< "Right Send " << szSendBuf << std::endl;
         usleep(500*1000);
         i++;
     }
     close(socketSend);
 
-    std::cout << "Client Quit Stop" << std::endl;                     
+    std::cout << "ClientSync Quit Stop" << std::endl;                     
 }

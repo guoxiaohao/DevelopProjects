@@ -9,13 +9,28 @@ set(CMAKE_BUILD_TYPE Debug)
 set(ExeName ExeSer)
 project(${ExeName})
 
+include_directories(../../../Third/include/)
+
+if(WIN32)
+else()
+	set(LIB_DIR ../../../Third/lib/libBoost)
+endif()
+
+link_directories(${LIB_DIR})
+if(WIN32)
+else()
+	link_libraries(libboost_system.a)
+endif()
+
 set(SRCS src/main.cpp
-         src/Server1.cpp
+         src/ServerSelect.cpp
+         src/ServerSyncBoost.cpp
+         src/ServerSync.cpp
          src/pch.cpp)
 
 add_executable(${ExeName} ${SRCS})
 
 if(WIN32)
 else()
-    target_link_libraries(${ExeName} pthread)
+    target_link_libraries(${ExeName} -pthread)
 endif()

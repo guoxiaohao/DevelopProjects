@@ -31,5 +31,5 @@ add_executable(${ExeName} ${SRCS})
 
 if(WIN32)
 else()
-    target_link_libraries(${ExeName} pthread)
+    target_link_libraries(${ExeName} -pthread)
 endif()

@@ -1,17 +1,16 @@
 #include "pch.h"
 
-#include "Server1.h"
+#include "ServerSync.h"
 
-CServer1::CServer1()
-{
-	bLoop = true;
-}
-
-CServer1::~CServer1()
+ServerSync::ServerSync()
 {
 }
 
-void CServer1::StartUp(uint32_t nPort)
+ServerSync::~ServerSync()
+{
+}
+
+void ServerSync::StartUp(const uint32_t& nPort)
 {
 	sockaddr_in addrListen;
 	memset(&addrListen, 0, sizeof(addrListen));
@@ -22,25 +21,24 @@ void CServer1::StartUp(uint32_t nPort)
 	int socketListen = socket(AF_INET, SOCK_STREAM, 0);
 	if (socketListen<0)
 	{
-		std::cout << "Wrong - Server Init Socket" << std::endl;
+		std::cout << "Wrong - ServerSync Init Socket" << std::endl;
 		return;
 	}
 
 	bind(socketListen, (sockaddr*)&addrListen, sizeof(addrListen));
 	listen(socketListen, 5);
-
     
 	sockaddr_in addrAccept;
 	memset(&addrAccept, 0, sizeof(addrAccept));
 	socklen_t nLens = sizeof(addrAccept);
 
 	std::shared_ptr<int> lpSocketAccept = std::make_shared<int>();
-	std::cout << "Wait for ..." << std::endl;
+	std::cout << "ServerSync Wait for ..." << std::endl;
 	*lpSocketAccept = accept(socketListen, (sockaddr*)&addrAccept, &nLens);
 
 	std::thread threadSer([&lpSocketAccept]()
 	{
-		std::cout << "Right Server Recv Data" << std::endl;
+		std::cout << "Right ServerSync Recv Data" << std::endl;
 		while (true)
 		{
 			char szRecvBuff[512] = { 0 };
@@ -57,7 +55,7 @@ void CServer1::StartUp(uint32_t nPort)
 	});
 
 	threadSer.join();
-	std::cout << "End" << std::endl;
+	std::cout << "ServerSync End" << std::endl;
 
 	close(*lpSocketAccept);
 	close(socketListen);
