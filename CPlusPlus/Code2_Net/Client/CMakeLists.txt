@@ -23,6 +23,7 @@ else()
 endif()
 
 set(SRCS src/main.cpp
+         src/ClientSelect.cpp
          src/ClientSync.cpp
          src/ClientSyncBoost.cpp
          src/pch.cpp)

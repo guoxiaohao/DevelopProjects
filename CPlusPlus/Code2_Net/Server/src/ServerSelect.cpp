@@ -32,7 +32,7 @@ void ServerSelect::StartUp(const uint32_t& nPort)
     bind(socketListen, (sockaddr*)&addrListen, sizeof(addrListen));
 	listen(socketListen, 5);
 
-    fd_set readSets;  
+    fd_set readFdSet;  
     int socketMax = socketListen;
     std::set<int> setsockets;
     std::set<int>::iterator iter;
@@ -40,40 +40,36 @@ void ServerSelect::StartUp(const uint32_t& nPort)
     setsockets.insert(socketListen);
     timeval timeout;
     std::cout << "ServerSelect Wait for ..." << std::endl;
-    int sock_client;
 
     while(bLoop)
     {
         timeout.tv_sec=0;
         timeout.tv_usec=200;
 
-        FD_ZERO(&readSets);
-        std::cout << setsockets.size() << std::endl;
+        FD_ZERO(&readFdSet);
         for(iter=setsockets.begin(); iter!=setsockets.end(); iter++)
         {
-            FD_SET(*iter, &readSets);
-            if(*iter>socketMax==socketListen)
+            FD_SET(*iter, &readFdSet);
+            if(*iter>socketMax)
             {
                 socketMax = *iter;
             }
         }
 
-        int nRets = select(socketMax+1, &readSets, NULL, NULL, &timeout);
+        int nRets = select(socketMax+1, &readFdSet, NULL, NULL, &timeout);
         if(nRets<0)
         {
-            std::cout << "ServerSelect Accept break" << std::endl;
             break;
         }
         else if(nRets==0)
         {
-            std::cout << "ServerSelect Accept Continue" << std::endl;
             continue;
         }
         else
         {
             for(iter=setsockets.begin(); iter!=setsockets.end(); iter++)
             {
-                if(FD_ISSET(*iter, &readSets)) 
+                if(FD_ISSET(*iter, &readFdSet)) 
                 {
                     if(*iter==socketListen)
                     {
@@ -81,7 +77,7 @@ void ServerSelect::StartUp(const uint32_t& nPort)
 
                         sockaddr_in client_addr;
                         socklen_t size = sizeof(client_addr);
-                        sock_client = accept(socketListen, (sockaddr*)(&client_addr), &size);
+                        int sock_client = accept(socketListen, (sockaddr*)(&client_addr), &size);
                         if(sock_client > 0)
                         {
                             setsockets.insert(sock_client);

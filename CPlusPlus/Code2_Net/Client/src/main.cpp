@@ -2,6 +2,8 @@
 
 #include "ClientSync.h"
 #include "ClientSyncBoost.h"
+#include "ClientSelect.h"
+#include "ClientAsyncBoost.h"
 
 int main(int argc, char** argv)
 {
@@ -21,6 +23,18 @@ int main(int argc, char** argv)
                 ClientSyncBoost cli;
                 std::thread threadCli(&ClientSyncBoost::Connect, &cli, std::ref(nPort), std::ref(strIp));
                 threadCli.join();
+            }
+            break;
+        case '2':
+            {
+                ClientSelect cli;
+                cli.Connect(nPort, strIp);
+            }
+            break;
+        case '3':
+            {
+                ClientASyncBoost cli;
+                cli.Connect(nPort, strIp);
             }
             break;
         default:
