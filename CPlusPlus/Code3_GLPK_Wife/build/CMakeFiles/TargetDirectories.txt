@@ -1,0 +1,3 @@
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/build/CMakeFiles/rebuild_cache.dir
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/build/CMakeFiles/edit_cache.dir
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/build/CMakeFiles/ExeGlpk.dir

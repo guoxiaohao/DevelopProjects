@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../SDK1/sdk_files_csv.h
+fstream
+-
+stdint.h
+-
+string.h
+-
+string
+-
+
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/src/main.cpp
+pch.h
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/src/pch.h
+sdk_files_csv.h
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/src/sdk_files_csv.h
+
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/src/pch.h
+iostream
+-
+stdio.h
+-
+stdlib.h
+-
+string
+-
+glpk.h
+/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code3_GLPK_Wife/src/glpk.h
+
