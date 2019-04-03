@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11 -g  -rdynamic CMakeFiles/ExeGlpk.dir/src/main.cpp.o CMakeFiles/ExeGlpk.dir/src/pch.cpp.o CMakeFiles/ExeGlpk.dir/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/SDK1/sdk_files_csv.cpp.o  -o ExeGlpk  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lglpk 

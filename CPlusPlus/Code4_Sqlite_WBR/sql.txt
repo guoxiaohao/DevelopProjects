@@ -1,0 +1,23 @@
+打开数据库文件
+sqlite3 supers_days.db
+
+查询所有表名
+select name from sqlite_master where type = 'table';
+
+查询XX表结构
+pragma table_info(super_days_table);
+
+清空表及重置自增长字段
+delete from super_days_table;    
+update sqlite_sequence set seq = 0 where name='super_days_table'; 
+
+新建表
+create table super_days_table(id integer PRIMARY KEY AUTOINCREMENT, hour text, super_area text, area_weight text, demand text, centers text, node_weight text, locate_x text, locate_y text, r_values text);
+
+插入表
+insert into super_days_table (hour, super_area, area_weight, demand, centers, node_weight, locate_x, locate_y, r_values) values ('1', '2', '3', '4', '5', '6', '7', '8', '9');
+
+drop table super_days_table;
+delete from super_days_table where id = 1;
+select * from super_days_table;
+select count(*) from super_days_table;

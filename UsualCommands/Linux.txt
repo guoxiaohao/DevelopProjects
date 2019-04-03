@@ -18,3 +18,6 @@ gdb install ubuntu:
   3.1 ./configure
   3.2 make
   3.3 sudo make install
+
+ubuntu uninstall:
+sudo apt-get --purge autoremove XXXX

@@ -1,0 +1,3 @@
+select distinct hour from super_days_table;
+
+select distinct super_area from super_days_table where hour='4';
