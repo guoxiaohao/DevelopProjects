@@ -58,7 +58,7 @@ void HandleDB::HandleDataFromDB()
     }
 }
 
-void HandleDB::TravelData()
+void HandleDB::TravelData(std::function<void(std::string&, std::string&)> funcs)
 {
     if(m_datas.nlen>0)
     {
@@ -68,7 +68,8 @@ void HandleDB::TravelData()
             for(int j=0; j<m_datas.ArrInfos[i].vecAreas.size(); j++)
             {
                 std::string super_areas = m_datas.ArrInfos[i].vecAreas[j];
-                std::cout << hours << super_areas << std::endl;
+
+                funcs(hours, super_areas);
             }
         }
     }

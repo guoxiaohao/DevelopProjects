@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "handle_database.h"
+#include "generate_data.h"
 
 int main(int argc, char** argv)
 {   
@@ -13,8 +14,12 @@ int main(int argc, char** argv)
     }
 
     HandleDB handledbs;
+    GenerateData generateDatas;
+
     handledbs.HandleDataFromDB();
-    handledbs.TravelData();
+    generateDatas.ResetInfos();
+    handledbs.TravelData(std::bind(&GenerateData::TravelGenerate, &generateDatas, std::placeholders::_1, std::placeholders::_2));
+    generateDatas.MySolutions();
 
     global_sqlite.UninitSqlite();
     return 0;

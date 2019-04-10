@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include "predefine.h"
 
 class HandleDB
@@ -9,7 +10,7 @@ public:
     ~HandleDB();
 public:
     void HandleDataFromDB();
-    void TravelData();
+    void TravelData(std::function<void(std::string&, std::string&)> funcs);
 protected:
     TargetInfosArr m_datas;
 };

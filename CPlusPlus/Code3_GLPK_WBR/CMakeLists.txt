@@ -14,6 +14,7 @@ link_directories(/usr/local/lib)
 include_directories(../SDK1)
 
 set(SRCS src/main.cpp 
+         src/generate_data.cpp 
          src/handle_database.cpp
          src/sqlite_operator.cpp 
          src/pch.cpp 
