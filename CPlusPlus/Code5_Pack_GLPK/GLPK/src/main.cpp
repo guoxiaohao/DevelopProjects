@@ -1,5 +1,12 @@
 #include "pch.h"
 
+
+
+int main(int argc, char** argv)
+{
+    std::cout << glp_version() << std::endl;
+    glp_prob *lp = nullptr;
+
 /*
 eg1
 Max
@@ -11,25 +18,6 @@ Sub
   x1>=0
   x2>=0
 */
-
-/*
-egs
-Max
-  z = 10x1 + 6x2 + 4x3;
-Sub
-  x1+x2+x3<=100
-  10x1+4x2+5x3<=600
-  2x1+2x2+6x3<=300
-  x1>=0
-  x2>=0
-  x3>=0
-*/
-
-int main(int argc, char** argv)
-{
-    std::cout << glp_version() << std::endl;
-    glp_prob *lp = nullptr;
-
     lp = glp_create_prob();
     if(lp!=nullptr)
     {
@@ -77,6 +65,18 @@ int main(int argc, char** argv)
     }
     std::cout << "Example1 end" << std::endl;
 
+/*
+egs
+Max
+  z = 10x1 + 6x2 + 4x3;
+Sub
+  x1+x2+x3<=100
+  10x1+4x2+5x3<=600
+  2x1+2x2+6x3<=300
+  x1>=0
+  x2>=0
+  x3>=0
+*/
     lp = glp_create_prob();
     if(lp!=nullptr)
     {
