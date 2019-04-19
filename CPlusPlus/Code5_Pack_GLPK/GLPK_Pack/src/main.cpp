@@ -97,7 +97,7 @@ Sub
 	condition2.params.clear();
 	condition3.params.clear();
 	condition1.params.push_back(1);condition1.params.push_back(1);
-	condition2.params.push_back(10);condition2.params.push_back(2);
+	condition2.params.push_back(1);condition2.params.push_back(2);
 	condition3.params.push_back(3);condition3.params.push_back(1);
 	condition1.tSide = glpk_pack::GLPK_SIDE::TARGET_DOWN;
 	condition2.tSide = glpk_pack::GLPK_SIDE::TARGET_UP;
