@@ -2,27 +2,63 @@
 
 import requests
 import bs4
+import re
+import os
+import sys
+import csv
 
 if __name__ == '__main__':
-	print("主程序运行")
+	dirPath, fileName = os.path.split(os.path.abspath(sys.argv[0]))
 	
-	strURL = "http://www.wise.xmu.edu.cn/people/faculty"
-	dataURL = requests.get(strURL)
+	print("0--Read RawData Generate ResultData;1--Read NetWorks Generate RawData;O(Other)--Read NetWorks and Generate ResultData")
+	inputContent = input("input:")
 	
-	if dataURL.status_code != 200:
-		print("错误 - 获取 URL")
+	if inputContent=="0":
+		jsonFilePath = dirPath + '\\RawData.txt'
 		
-	print("正确 - 获取 URL")
-	htmlURL = dataURL.content
-	soupParser = bs4.BeautifulSoup(htmlURL, 'html.parser')
-	
-	#找到第一个带有‘div’标签,包含"class = 'people_list'"的HTML
-	div_people_list =  soupParser.find('div', attrs={'class': 'people_list'})
-	print(div_people_list)
-	#find_all取出所有，返回列表
-	#a_s = div_people_list.find_all('a', attrs={'target': '_blank'})
-	
-	#for a in a_s:
-	#	url = a['href']
-	#	name = a.get_text()
-	#	print(name,url)
+		dataFiles = open(jsonFilePath, "rb")
+		htmlURL = dataFiles.read()
+		dataFiles.close()
+		
+		soupParser = bs4.BeautifulSoup(htmlURL, 'html.parser')
+		div_people_list = soupParser.find('div', attrs={'class': 'people_list'})
+		people_list_info = div_people_list.find_all('tr')
+		numbTotal = 0
+		
+		datafilepath = dirPath + '\\ResultData.txt'
+		datafileresults = open(datafilepath, "wb+")
+		for everyone in people_list_info:
+			everyoneName = everyone.find('a', attrs={'target': '_blank'})
+			if everyoneName:
+				numbTotal = numbTotal + 1
+				print(numbTotal)
+				everyonelements = everyone.find_all('td')
+				url = everyoneName['href']
+				datafileresults.write(url.encode("utf-8"))
+				for telements in everyonelements:
+					datafileresults.write(telements.get_text().encode("utf-8"))
+		datafileresults.close()
+		print("Program Ends")
+	elif inputContent=="1":
+		print("Program Ends")
+		csvFilePath = dirPath + '\\supers_days_16.csv'
+		
+		csvFiles = open(csvFilePath, "w")
+		csvWrite = csv.writer(csvFiles)
+		csvWrite.writerow(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+		csvWrite.writerows([[0, 1, 0.704970959, 1, "35.4770574,-83.3205859;35.0964003,-83.7199136;35.624394,-82.9931607;35.1197519,-83.336188;35.4328955,-83.4643551;35.2190534,-82.7778579;", 0.704970959, 35.29920894, -83.60877046, "1,1,1,1,1,0"]])
+		csvFiles.close()
+	else:
+		jsonFilePath = dirPath + '\\RawData.txt'
+		
+		strURL = "http://www.wise.xmu.edu.cn/people/faculty"
+		dataURL = requests.get(strURL)
+		if dataURL.status_code != 200:
+			print("wrong - URL")
+		else:
+			print("right - URL")
+			htmlURL = dataURL.content
+			dataFiles = open(jsonFilePath, "wb+")
+			dataFiles.write(htmlURL)
+			dataFiles.close()
+		print("Program Ends")

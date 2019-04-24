@@ -11,6 +11,7 @@ public:
 public:
 	bool Init();
 	void Uninit();
+	
 	void WriteDatas(double* arryDouble, int nNums);
 protected:
 	std::fstream m_fstream;

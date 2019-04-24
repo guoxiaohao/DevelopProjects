@@ -18,27 +18,21 @@ if __name__ == '__main__':
 	jsonFileContent = json.load(jsonFile)
 	
 	StringContent = jsonFileContent['StringContent']
-	
 	pattern = re.compile(r'\d+')
 	result = pattern.findall(StringContent)
 	print(result)
-	
 	pattern = re.compile(r'python')
 	result = pattern.findall(StringContent)
 	print(result)
-	
 	pattern = re.compile(r'[Pp]ython')
 	result = pattern.findall(StringContent)
 	print(result)
-	
 	pattern = re.compile(r'[0-9]')
 	result = pattern.findall(StringContent)
 	print(result)
-	
 	pattern = re.compile(r'[a-z]')
 	result = pattern.findall(StringContent)
 	print(result)
-	
 	pattern = re.compile(r'[^Ppy]')
 	result = pattern.findall(StringContent)
 	print(result)
@@ -54,4 +48,13 @@ if __name__ == '__main__':
 	print(result)
 	pattern = re.compile(r'ru+b')
 	result = pattern.findall(Test2)
+	print(result)
+	
+	Test3 = jsonFileContent['BaseSettings']['Test3']
+	pattern = re.compile(r'<.*>')
+	result = pattern.findall(Test3)
+	print(result)
+	Test3 = jsonFileContent['BaseSettings']['Test3']
+	pattern = re.compile(r'<.*?>')
+	result = pattern.findall(Test3)
 	print(result)

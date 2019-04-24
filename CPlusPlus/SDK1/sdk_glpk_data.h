@@ -7,7 +7,7 @@ namespace glpk_pack{
 
 enum GLPK_TAGET
 {
-    TARGET_MIN = 0,
+	TARGET_MIN = 0,
 	TARGET_MAX = 1
 };
 
@@ -35,12 +35,13 @@ struct TargetParamRange
 class GlpkDatas
 {
 public:
-    GlpkDatas();
-    virtual ~GlpkDatas();
+	GlpkDatas();
+	virtual ~GlpkDatas();
 public:
 	virtual bool Init();
-    virtual void Uninit();
-    virtual void SetTarget(std::vector<double>& tagetfun, GLPK_TAGET tagetMinMax);
+	virtual void Uninit();
+	
+	virtual void SetTarget(std::vector<double>& tagetfun, GLPK_TAGET tagetMinMax);
 	virtual void SetSubjectInequl(SubjectInequal& subjectinequal);
 	virtual void SetTargetParamRange(TargetParamRange& tagetparam);
 protected:

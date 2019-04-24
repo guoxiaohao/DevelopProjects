@@ -16,6 +16,7 @@ include_directories(../SDK1)
 set(SRCS src/main.cpp 
          src/sqlite_writedata.cpp 
          src/handle_raw_data.cpp 
+         src/sqlite_operator.cpp 
          src/pch.cpp 
          ../SDK1/sdk_files_csv.cpp)
 

@@ -47,7 +47,7 @@ void ResultJson::WriteDatas(double* arryDouble, int nNums)
 		m_fstream << m_jsonWriter.write(m_jsonValue);
 		m_fstream.flush();
 		
-		m_fstream << '\t' << '\t';
+		m_fstream << '\t';
 		m_jsonValue.clear();
 		for(int i=0;i<nNums-1;i++)
 		{

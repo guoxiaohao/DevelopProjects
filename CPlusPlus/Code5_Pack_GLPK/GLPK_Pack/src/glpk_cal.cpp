@@ -21,8 +21,6 @@ bool GlpkCal::Init()
 		std::cout << glp_version() << std::endl;
 		glp_set_prob_name(lp, "DatasHandle");
 		
-		m_bjson = m_resultjson.Init();
-		
 		return true;
 	}
 	else
@@ -33,7 +31,6 @@ bool GlpkCal::Init()
 
 void GlpkCal::Uninit()
 {
-	m_resultjson.Uninit();
 	glp_delete_prob(lp);
 	glpk_pack::GlpkDatas::Uninit();
 }
@@ -111,7 +108,7 @@ bool GlpkCal::HandleTargetParams()
 			glp_set_col_bnds(lp, i+1, GLP_LO, m_vecTargetParam[i].lVal, m_vecTargetParam[i].rVal);
 		}
 	}
-        
+
 	for(size_t i=0; i<m_tarfunpara.size(); i++)
 	{
 		glp_set_obj_coef(lp, i+1, m_tarfunpara[i]);
@@ -120,7 +117,7 @@ bool GlpkCal::HandleTargetParams()
 	return true;
 }
 
-void GlpkCal::GetSolutions()
+void GlpkCal::GetSolutions(std::function<void(double*, int)> func)
 {
 	int SumNum = m_vecSubCond.size() * m_vecTargetParam.size();
 	
@@ -150,7 +147,11 @@ void GlpkCal::GetSolutions()
 		dRetValus[i+1] = glp_get_col_prim(lp, i+1);
 		std::cout << "Variable" << i+1 << " Value " << dRetValus[i+1] << std::endl;
 	}
-	m_resultjson.WriteDatas(dRetValus, m_vecTargetParam.size()+1);
+	
+	if(func!=nullptr)
+	{
+		func(dRetValus, m_vecTargetParam.size()+1);
+	}
 	
 	delete []ia;
 	delete []ja;

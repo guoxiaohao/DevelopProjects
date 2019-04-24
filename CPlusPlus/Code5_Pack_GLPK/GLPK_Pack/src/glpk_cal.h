@@ -2,7 +2,7 @@
 
 #include "glpk.h"
 #include "sdk_glpk_data.h"
-#include "result_json.h"
+#include <functional>
 
 class GlpkCal:public glpk_pack::GlpkDatas
 {
@@ -16,10 +16,7 @@ public:
 	
 	bool HandleSubjects();
 	bool HandleTargetParams();
-	void GetSolutions();
+	void GetSolutions(std::function<void(double*, int)> func);
 protected:
 	glp_prob *lp;
-
-	bool m_bjson;
-	ResultJson m_resultjson;
 };

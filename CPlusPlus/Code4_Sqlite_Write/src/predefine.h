@@ -14,3 +14,10 @@ struct PrepareParmStruct
     std::string str_lontiIndex;
     std::string str_rvalueIndex;
 };
+
+struct TeacherInfoStruct
+{
+    std::string str_name;
+    std::string str_job;
+    std::string str_email;
+};
