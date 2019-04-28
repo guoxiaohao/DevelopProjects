@@ -1,0 +1,6 @@
+syntax = "proto2";
+
+message server2client{
+	required int32 type = 1;
+	required string command_type = 2;
+}

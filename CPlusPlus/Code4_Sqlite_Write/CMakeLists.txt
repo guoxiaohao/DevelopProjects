@@ -9,7 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(ExeName ExeDBWrite)
 project(${ExeName})
 
-link_directories(/usr/local/lib)
+#link_directories(/usr/local/lib)
 
 include_directories(../SDK1)
 

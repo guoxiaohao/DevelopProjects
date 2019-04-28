@@ -7,7 +7,7 @@
 int main(int argc, char** argv)
 {
     std::string DBName1 = "/home/guoxy/DBSqlite/supers_days.db";
-    std::string DBName2 = "/home/guoxy/DBSqlite/teacher_infos.db;";
+    std::string DBName2 = "/home/guoxy/DBSqlite/teacher_infos.db";
 
     bool bret1 = global_sqlite1.InitSqlite(DBName1);
     bool bret2 = global_sqlite2.InitSqlite(DBName2);
@@ -32,10 +32,14 @@ int main(int argc, char** argv)
     CSVs::FilesOpes readFile2;
     readFile1.SetFileName(fileName1);
     readFile2.SetFileName(fileName2);
-
-    //get everyline in file
+    
     HandleRawData1 handleDatas1;
     SqlWrite1 sqlwrite1;
+    HandleRawData2 handleDatas2;
+    SqlWrite2 sqlwrite2;
+
+    //get everyline in file
+    /*
     uint32_t nTotal = 0;
     while(true)
     {
@@ -56,9 +60,8 @@ int main(int argc, char** argv)
             handleDatas1.RecvData(strData, std::bind(&SqlWrite1::DealDataSuperdaystable, &sqlwrite1, std::placeholders::_1));
         }
     }
+    
     //get everyline in file
-    HandleRawData2 handleDatas2;
-    SqlWrite2 sqlwrite2;
     while(true)
     {
         std::string strData;
@@ -70,12 +73,30 @@ int main(int argc, char** argv)
         
         handleDatas2.RecvData(strData, std::bind(&SqlWrite2::DealDataSuperdaystable, &sqlwrite2, std::placeholders::_1));
     }
-
+    */
+    
+    int nRowNums = 0;
     std::string strTableName1 = "super_days_table";
-    std::cout << "Row number " << sqlwrite1.GetTableRowNumber(strTableName1) << std::endl;
+    nRowNums = sqlwrite1.GetTableRowNumber(strTableName1);
+    if(nRowNums>=0)
+    {
+        std::cout << strTableName1 << " Row number " << nRowNums << std::endl;
+    }
+    else
+    {
+        std::cout << strTableName1 << " Wrong" << std::endl;
+    }
 
     std::string strTableName2 = "teacher_info_table";
-    std::cout << "Row number " << sqlwrite2.GetTableRowNumber(strTableName2) << std::endl;
+    nRowNums = sqlwrite2.GetTableRowNumber(strTableName2);
+    if(nRowNums>=0)
+    {
+        std::cout << strTableName2 << " Row number " << nRowNums << std::endl;
+    }
+    else
+    {
+        std::cout << strTableName2 << " Wrong" << std::endl;
+    }
     
     global_sqlite1.UninitSqlite();
     global_sqlite2.UninitSqlite();

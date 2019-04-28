@@ -57,7 +57,7 @@ void SqlWrite1::DealDataSuperdaystable(PrepareParmStruct& paraStruct)
     char szErrMsg[1024] = {0};
     char sql[1024] = {0};
 
-    sprintf(sql, "insert into super_days_table (hour, super_area, area_weight, demand, centers, node_weight, locate_x, locate_y, r_values) values ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+    sprintf(sql, "insert into super_days_table (hour, super_area, area_weight, demand, centers, node_weight, locate_x, locate_y, r_values) values ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
     paraStruct.str_hour.c_str(), paraStruct.str_superIndex.c_str(), paraStruct.str_areaweightIndex.c_str(), paraStruct.str_demandIndex.c_str(), paraStruct.str_centersIndex.c_str(),
     paraStruct.str_nodeweightIndex.c_str(), paraStruct.str_latiIndex.c_str(), paraStruct.str_lontiIndex.c_str(), paraStruct.str_rvalueIndex.c_str());
     
@@ -120,7 +120,7 @@ void SqlWrite2::DealDataSuperdaystable(TeacherInfoStruct& paraStruct)
     char szErrMsg[1024] = {0};
     char sql[1024] = {0};
 
-    sprintf(sql, "insert into teacher_info_table (name, job, email) values ('%s', '%s', '%s');", paraStruct.str_name.c_str(), paraStruct.str_job.c_str(), paraStruct.str_email.c_str());
+    sprintf(sql, "insert into teacher_info_table (name, job, email) values ('%s', '%s', '%s')", paraStruct.str_name.c_str(), paraStruct.str_job.c_str(), paraStruct.str_email.c_str());
     
     char* szErrs = szErrMsg;
     int rs = sqlite3_exec(global_sqlite2.m_lpDB, sql, 0, 0, &szErrs);
