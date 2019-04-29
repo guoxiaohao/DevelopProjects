@@ -11,29 +11,51 @@ UseForTest::~UseForTest()
 {
 }
 
-int UseForTest::add(int a, int b)
+void UseForTest::generateDatas1(std::function<void(std::string&, std::function<void(std::string&)>)> funca, std::function<void(std::string&)> funcb)
 {
-	return a+b;
+	char datas1[1024] = {0};
+	
+	server2client::msg_head head1;
+	server2client::msg_connect connect1;
+	
+	head1.set_ntype(server2client::msg_head_msg_type::msg_head_msg_type_connect);
+	connect1.clear_arr_ints();
+	connect1.add_arr_ints(5);
+	connect1.add_arr_ints(20);
+	connect1.clear_arr_strings();
+	connect1.add_arr_strings("guoxh");
+	connect1.add_arr_strings("123456");
+	head1.set_bytes_msg(connect1.ByteSize());
+	
+	head1.SerializeToArray(datas1, head1.ByteSize());
+	connect1.SerializeToArray(datas1+head1.ByteSize(), connect1.ByteSize());
+	
+	std::string buffString(datas1, head1.ByteSize()+connect1.ByteSize());
+	if(funca)
+	{
+		funca(buffString, funcb);
+	}
 }
 
-bool UseForTest::getIpInfo()
+void UseForTest::generateDatas2(std::function<void(std::string&, std::function<void(std::string&)>)> funca, std::function<void(std::string&)> funcb)
 {
-	std::vector<std::string> vec_strings;
-	vec_strings.push_back("eth");vec_strings.push_back("em");vec_strings.push_back("oct");
+	//map_info_size()
+	char datas2[1024] = {0};
 	
-	return true;
-}
-
-bool UseForTest::compareStructs()
-{
-	int ttypes = 1;
-	std::string tcommand_type = "ABCD";
-	server2client tSerCliTmp;
-	char datas[1024] = {0};
+	server2client::msg_head head1;
+	server2client::msg_testmap testmap1;
 	
-	tSerCliTmp.set_type(ttypes);
-	tSerCliTmp.set_command_type(tcommand_type);
-	tSerCliTmp.SerializeToString(datas);
+	head1.set_ntype(server2client::msg_head_msg_type::msg_head_msg_type_testmap);
+	testmap1.clear_map_info();
+	//testmap1
+	head1.set_bytes_msg(testmap1.ByteSize());
 	
-	return true;
+	head1.SerializeToArray(datas2, head1.ByteSize());
+	testmap1.SerializeToArray(datas2+head1.ByteSize(), testmap1.ByteSize());
+	
+	std::string buffString(datas2, head1.ByteSize()+testmap1.ByteSize());
+	if(funca)
+	{
+		funca(buffString, funcb);
+	}
 }

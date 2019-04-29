@@ -3,18 +3,18 @@
 #include <fstream>
 #include <stdint.h>
 #include <string.h>
-
 #include <string>
 
-namespace CSVs
+namespace SDK_FILES
 {
 
-class FilesOpes
+class FilesRead
 {
 public:
-    FilesOpes();
-    ~FilesOpes();
+    FilesRead();
+    ~FilesRead();
 public:
+    void SetFileName(char* filename);
     void SetFileName(const std::string& filename);
     bool GetPerLine(std::string& perline); 
 protected:

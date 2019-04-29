@@ -1,13 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <string>
-
-struct InfoStruct
-{
-	int type;
-	std::string commands;
-};
+#include <functional>
 
 class UseForTest
 {
@@ -15,10 +8,6 @@ public:
 	UseForTest();
 	~UseForTest();
 public:
-	int add(int a, int b);
-	bool getIpInfo();
-	bool compareStructs();
-protected:
-	InfoStruct m1;
-	InfoStruct m2;
+	void generateDatas1(std::function<void(std::string&, std::function<void(std::string&)>)> funca, std::function<void(std::string&)> funcb);
+	void generateDatas2(std::function<void(std::string&, std::function<void(std::string&)>)> funca, std::function<void(std::string&)> funcb);
 };

@@ -1,6 +1,61 @@
-syntax = "proto2";
+syntax = "proto3";
 
-message server2client{
-	required int32 type = 1;
-	required string command_type = 2;
+package server2client;
+
+//every message has the head filed to indicate 
+//next part --message type and message bytes
+message msg_head
+{
+	enum msg_type
+	{
+		connect = 0;
+		login = 1;
+		establish_brokerchannel = 2;
+		connect_ack = 3;
+		login_ack = 4;
+		establish_brokerchannel_ack = 5;
+		testmap = 6;
+	}
+	msg_type ntype = 1;
+	int32 bytes_msg = 2;
+}
+
+message msg_connect
+{
+	repeated int32 arr_ints = 1;//sdkVersion
+	repeated string arr_strings = 2;//processId, connectType, sharedMem
+}
+
+message msg_connect_ack
+{
+	repeated int32 arr_ints = 1;//result, confirmCT
+}
+
+message msg_login
+{
+	repeated int32 arr_ints = 1;//server id
+	repeated string arr_strings = 2;//userName, password
+}
+
+message msg_login_ack
+{
+	repeated int32 arr_ints = 1;//result
+	repeated string arr_strings = 2;//epsilon 2 client channel
+}
+
+message msg_establish_brokerchannel
+{
+	repeated int32 arr_ints = 1;//broker ids
+	repeated string arr_strings = 2;//memoryNames
+}
+
+message msg_establish_brokerchannel_ack
+{
+	repeated int32 arr_ints = 1;//broker ids
+	repeated string arr_strings = 2;//memoryNames
+}
+
+message msg_testmap
+{
+	map<int32, string> map_info = 1;
 }

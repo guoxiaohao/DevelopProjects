@@ -1,25 +1,33 @@
-#include "sdk_files_csv.h"
+#include "sdk_files_read.h"
 
 
-namespace CSVs
+namespace SDK_FILES
 {
 
-FilesOpes::FilesOpes()
+FilesRead::FilesRead()
 {
     m_position = 0;
 }
 
-FilesOpes::~FilesOpes()
+FilesRead::~FilesRead()
 {
-    
+    if(m_fstream.is_open())
+    {
+        m_fstream.close();
+    }
 }
 
-void FilesOpes::SetFileName(const std::string& filename)
+void FilesRead::SetFileName(char* filename)
 {
     m_fileName = filename;
 }
 
-bool FilesOpes::GetPerLine(std::string& perline)
+void FilesRead::SetFileName(const std::string& filename)
+{
+    m_fileName = filename;
+}
+
+bool FilesRead::GetPerLine(std::string& perline)
 {
     if(m_fileName=="")
     {
