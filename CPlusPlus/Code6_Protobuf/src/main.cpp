@@ -8,9 +8,9 @@
 
 int main(int argc, char** argv)
 {
-	UseForTest usefortest;
-	DataSend datasend;
-	DataRecv datarecv;
+	UseForTest usefortest;//code for protobuf
+	DataSend datasend;//save protobuf
+	DataRecv datarecv;//parse protobuf
 	
 	usefortest.generateDatas1(std::bind(&DataSend::DataSendFunction1, &datasend, std::placeholders::_1, std::placeholders::_2),
 					std::bind(&DataRecv::DataRecvFunction1, &datarecv, std::placeholders::_1));

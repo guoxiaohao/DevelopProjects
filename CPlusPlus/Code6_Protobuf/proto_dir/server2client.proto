@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package server2client;
 
-//every message has the head filed to indicate 
-//next part --message type and message bytes
-message msg_head
+message msg_content
 {
 	enum msg_type
 	{
@@ -16,43 +14,43 @@ message msg_head
 		establish_brokerchannel_ack = 5;
 		testmap = 6;
 	}
-	msg_type ntype = 1;
-	int32 bytes_msg = 2;
+	msg_type type = 1;
+	bytes datas = 2;
 }
 
 message msg_connect
 {
-	repeated int32 arr_ints = 1;//sdkVersion
-	repeated string arr_strings = 2;//processId, connectType, sharedMem
+	repeated int32 arr_ints = 1;
+	repeated string arr_strings = 2;
 }
 
 message msg_connect_ack
 {
-	repeated int32 arr_ints = 1;//result, confirmCT
+	repeated int32 arr_ints = 1;
 }
 
 message msg_login
 {
-	repeated int32 arr_ints = 1;//server id
-	repeated string arr_strings = 2;//userName, password
+	repeated int32 arr_ints = 1;
+	repeated string arr_strings = 2;
 }
 
 message msg_login_ack
 {
-	repeated int32 arr_ints = 1;//result
-	repeated string arr_strings = 2;//epsilon 2 client channel
+	repeated int32 arr_ints = 1;
+	repeated string arr_strings = 2;
 }
 
 message msg_establish_brokerchannel
 {
-	repeated int32 arr_ints = 1;//broker ids
-	repeated string arr_strings = 2;//memoryNames
+	repeated int32 arr_ints = 1;
+	repeated string arr_strings = 2;
 }
 
 message msg_establish_brokerchannel_ack
 {
-	repeated int32 arr_ints = 1;//broker ids
-	repeated string arr_strings = 2;//memoryNames
+	repeated int32 arr_ints = 1;
+	repeated string arr_strings = 2;
 }
 
 message msg_testmap

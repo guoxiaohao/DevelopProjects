@@ -10,17 +10,19 @@ set(ExeName ExeProtobuf)
 project(${ExeName})
 
 add_definitions(-D MACRO_SAVE_FILE)
+
 #link_directories(/usr/local/lib)
 
-include_directories(../SDK1)
+include_directories(${CMAKE_SOURCE_DIR}/../SDK1)
+include_directories(${CMAKE_SOURCE_DIR}/proto_dir)
 
 set(SRCS src/main.cpp 
          src/use_for_test.cpp 
          src/datas_send.cpp
          src/datas_recv.cpp
-         src/server2client.pb.cc 
+         ${CMAKE_SOURCE_DIR}/proto_dir/server2client.pb.cc 
          src/pch.cpp 
-        ../SDK1/sdk_files_write.cpp )
+         ${CMAKE_SOURCE_DIR}/../SDK1/sdk_files_write.cpp )
 
 add_executable(${ExeName} ${SRCS})
 

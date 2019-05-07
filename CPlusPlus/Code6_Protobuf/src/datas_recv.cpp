@@ -13,40 +13,55 @@ DataRecv::~DataRecv()
 
 void DataRecv::DataRecvFunction1(std::string& strcontent)
 {
-	server2client::msg_head head2;
-	server2client::msg_connect connect2;
+	server2client::msg_content content;
+	content.ParseFromString(strcontent);
 	
-	char sz_data[1024] = {0};
-	memcpy(sz_data, strcontent.c_str(), strcontent.length());
+	if(content.type()!=server2client::msg_content_msg_type_connect)
+	{
+		std::cout << "type msg_connect wrong" << std::endl;
+		return;
+	}
 	
-	head2.ParseFromString(sz_data);
-	connect2.ParseFromArray(sz_data+strcontent.length()-head2.bytes_msg(), head2.bytes_msg());
+	std::cout << "type msg_connect right " << content.type() << std::endl;
+	server2client::msg_connect connects;
+	std::string tmpstring = content.datas();
+	connects.ParseFromString(tmpstring);
 	
-	std::cout << head2.bytes_msg() << std::endl;
-	if(connect2.arr_ints_size()==0)
+	if(connects.arr_ints_size()==0)
 	{
 		std::cout << "param volum is 0" << std::endl;
 	}
 	else
 	{
-		for(int i=0; i<connect2.arr_ints_size(); i++)
+		for(int i=0; i<connects.arr_ints_size(); i++)
 		{
-			std::cout << connect2.arr_ints(i) << std::endl;
+			std::cout << connects.arr_ints(i) << std::endl;
 		}
 	}
-	if(connect2.arr_strings_size()==0)
+	if(connects.arr_strings_size()==0)
 	{
 		std::cout << "param volum is 0" << std::endl;
 	}
 	else
 	{
-		for(int i=0; i<connect2.arr_strings_size(); i++)
+		for(int i=0; i<connects.arr_strings_size(); i++)
 		{
-			std::cout << connect2.arr_strings(i) << std::endl;
+			std::cout << connects.arr_strings(i) << std::endl;
 		}
 	}
 }
 
 void DataRecv::DataRecvFunction2(std::string& strcontent)
 {
+	server2client::msg_content content;
+	content.ParseFromString(strcontent);
+	
+	if(content.type()==server2client::msg_content_msg_type_testmap)
+	{
+		std::cout << "type msg_testmap right " << content.type() << std::endl;
+	}
+	else
+	{
+		std::cout << "type msg_testmap wrong" << std::endl;
+	}
 }
