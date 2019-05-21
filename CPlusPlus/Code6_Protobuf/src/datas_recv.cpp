@@ -1,7 +1,7 @@
 #include "pch.h"
 
 #include "datas_recv.h"
-#include "server2client.pb.h"
+#include "proto_dir/common_pack_proto.h"
 
 DataRecv::DataRecv()
 {
@@ -16,7 +16,7 @@ void DataRecv::DataRecvFunction1(std::string& strcontent)
 	server2client::msg_content content;
 	content.ParseFromString(strcontent);
 	
-	if(content.type()!=server2client::msg_content_msg_type_connect)
+	if(content.type()!=server2client::msg_connect::id)
 	{
 		std::cout << "type msg_connect wrong" << std::endl;
 		return;
@@ -56,7 +56,7 @@ void DataRecv::DataRecvFunction2(std::string& strcontent)
 	server2client::msg_content content;
 	content.ParseFromString(strcontent);
 	
-	if(content.type()==server2client::msg_content_msg_type_testmap)
+	if(content.type()==server2client::msg_testmap::id)
 	{
 		std::cout << "type msg_testmap right " << content.type() << std::endl;
 	}

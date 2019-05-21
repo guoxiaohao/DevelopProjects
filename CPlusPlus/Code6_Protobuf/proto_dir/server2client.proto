@@ -4,56 +4,24 @@ package server2client;
 
 message msg_content
 {
-	enum msg_type
-	{
-		connect = 0;
-		login = 1;
-		establish_brokerchannel = 2;
-		connect_ack = 3;
-		login_ack = 4;
-		establish_brokerchannel_ack = 5;
-		testmap = 6;
-	}
-	msg_type type = 1;
+	int32 type = 1;
 	bytes datas = 2;
 }
 
 message msg_connect
 {
-	repeated int32 arr_ints = 1;
-	repeated string arr_strings = 2;
-}
-
-message msg_connect_ack
-{
-	repeated int32 arr_ints = 1;
-}
-
-message msg_login
-{
-	repeated int32 arr_ints = 1;
-	repeated string arr_strings = 2;
-}
-
-message msg_login_ack
-{
-	repeated int32 arr_ints = 1;
-	repeated string arr_strings = 2;
-}
-
-message msg_establish_brokerchannel
-{
-	repeated int32 arr_ints = 1;
-	repeated string arr_strings = 2;
-}
-
-message msg_establish_brokerchannel_ack
-{
+	enum type_val{
+		id = 0;
+	}
 	repeated int32 arr_ints = 1;
 	repeated string arr_strings = 2;
 }
 
 message msg_testmap
 {
+	enum type_val{
+		invalid = 0;
+		id = 5;
+	}
 	map<int32, string> map_info = 1;
 }

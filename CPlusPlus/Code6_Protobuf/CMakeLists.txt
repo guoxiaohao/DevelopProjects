@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.11)
 
 if(WIN32)
 else()
@@ -6,28 +6,9 @@ else()
 endif()
 
 set(CMAKE_BUILD_TYPE Debug)
-set(ExeName ExeProtobuf)
-project(${ExeName})
 
-add_definitions(-D MACRO_SAVE_FILE)
+set(PROTO_DEFINE ${CMAKE_SOURCE_DIR}/proto_dir)
+execute_process(COMMAND protoc --proto_path=${PROTO_DEFINE}/ --cpp_out=${PROTO_DEFINE}/ ${PROTO_DEFINE}/server2client.proto)
 
-#link_directories(/usr/local/lib)
-
-include_directories(${CMAKE_SOURCE_DIR}/../SDK1)
-include_directories(${CMAKE_SOURCE_DIR}/proto_dir)
-
-set(SRCS src/main.cpp 
-         src/use_for_test.cpp 
-         src/datas_send.cpp
-         src/datas_recv.cpp
-         ${CMAKE_SOURCE_DIR}/proto_dir/server2client.pb.cc 
-         src/pch.cpp 
-         ${CMAKE_SOURCE_DIR}/../SDK1/sdk_files_write.cpp )
-
-add_executable(${ExeName} ${SRCS})
-
-if(WIN32)
-else()
-    target_link_libraries(${ExeName} -lprotobuf)
-    target_link_libraries(${ExeName} -lpthread)
-endif()
+add_subdirectory(proto_dir)
+add_subdirectory(src)
