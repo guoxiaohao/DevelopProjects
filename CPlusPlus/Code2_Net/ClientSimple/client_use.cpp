@@ -79,12 +79,12 @@ void ClientSpi::OnConnected(int result)
 {
 	if(result==0)
 	{
-		std::cout << "Failed Success" << std::endl;
+		std::cout << "Success" << std::endl;
 		connector_->SendMessage("guoxh client simple");
 	}
 	else
 	{
-		std::cout << "Failed Connect" << std::endl;
+		std::cout << "Failed" << std::endl;
 	}
 }
 

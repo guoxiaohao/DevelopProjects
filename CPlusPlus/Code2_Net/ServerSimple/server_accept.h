@@ -4,15 +4,17 @@
 #include <map>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include "server_base.h"
 #include "server_use.h"
 
-class ServerAccept
+class ServerSocket:public ServerListen
 {
 public:
-	ServerAccept(){}
-	~ServerAccept(){}
+	ServerSocket(){}
+	~ServerSocket(){}
 
-	void Start();
+	virtual void Start(int nport) override;
+	virtual void DeleteSocket(int sockets) override;
 protected:
 	void start_accept();
 

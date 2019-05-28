@@ -1,1 +1,0 @@
-protoc --proto_path=./ --cpp_out=./ ./server2client.proto

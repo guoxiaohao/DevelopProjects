@@ -8,7 +8,6 @@ endif()
 set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(${CMAKE_SOURCE_DIR}/../../Third/include/)
-include_directories(${CMAKE_SOURCE_DIR}/../SDK1)
 
 if(WIN32)
 else()
@@ -18,4 +17,5 @@ else()
 endif()
 
 add_subdirectory(ClientSimple)
+#add_subdirectory(ClientSelect)
 add_subdirectory(ServerSimple)

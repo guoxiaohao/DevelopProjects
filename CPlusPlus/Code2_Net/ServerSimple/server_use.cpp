@@ -10,8 +10,7 @@ int& ServerUse::socket()
 
 void ServerUse::Start()
 {
-	std::thread threads(&ServerUse::RecvData, this);
-	threads.detach();
+	lpthread = std::make_shared<std::thread>(&ServerUse::RecvData, this);
 }
 
 void ServerUse::RecvData()
@@ -32,5 +31,11 @@ void ServerUse::RecvData()
 		}
 	}
 
-	std::cout << "Connect Closed" << std::endl;
+	std::cout << socket_ << " closed" << std::endl;
+	_spi->DeleteSocket(socket_);
+}
+
+void ServerUse::RegisterSpi(ServerListen* spi)
+{
+	_spi = spi;
 }
