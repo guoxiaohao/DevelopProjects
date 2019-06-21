@@ -12,6 +12,8 @@ public:
 	virtual void OnDisconnected(){}
 
 	virtual void OnMessage(std::string msg) {}
+
+	virtual void SendMessage(const std::string& msg) {}
 };
 
 class Connector
@@ -25,7 +27,9 @@ public:
 
 	virtual void Connect(std::string& ip, int port) = 0;
 
-	virtual void SendMessage(const std::string& msg) = 0;
+	virtual void SendMessage(std::string msg) = 0;
 
-	virtual void RecvMessage() = 0;
+	virtual void EnableWorkThread() = 0;
+
+	virtual void DoWorkThread() = 0;
 };

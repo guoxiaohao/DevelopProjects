@@ -17,5 +17,5 @@ else()
 endif()
 
 add_subdirectory(ClientSimple)
-#add_subdirectory(ClientSelect)
 add_subdirectory(ServerSimple)
+add_subdirectory(SerEpoll)

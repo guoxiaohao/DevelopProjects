@@ -2,6 +2,8 @@
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <boost/asio.hpp>
+#include <boost/bind/bind.hpp>
 #include "client_base.h"
 
 class ConnectorImpl:public Connector 
@@ -15,12 +17,21 @@ public:
 
 	virtual void Connect(std::string& ip, int port);
 
-	virtual void SendMessage(const std::string& msg);
+	virtual void SendMessage(std::string msg);
 
-	virtual void RecvMessage();
+	virtual void EnableWorkThread();
+
+	virtual void DoWorkThread();
 protected:
-	ConnectorSpi* spi_;
+	void do_connect(std::string& ip, int port);
+	void do_send(std::string msg);
+
+	bool bLoop{false};
+
+	ConnectorSpi* spi_{nullptr};
 	int socket_;
+	boost::asio::io_service io_service_;
+	std::shared_ptr<boost::asio::deadline_timer> deadline_timers;
 };
 
 Connector* CreateConnectorObj();
@@ -31,13 +42,13 @@ public:
 	ClientSpi();
 	virtual ~ClientSpi();
 
+	void Start();
+public:
 	virtual void OnConnected(int result);
 
 	virtual void OnDisconnected();
 
 	virtual void OnMessage(std::string msg);
-public:
-	void Start();
 protected:
 	Connector* connector_ {nullptr};
 

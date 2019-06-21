@@ -15,6 +15,34 @@ void ConnectorImpl::RegisterSpi(ConnectorSpi* spi)
 
 void ConnectorImpl::Connect(std::string& ip, int port)
 {
+	deadline_timers = std::make_shared<boost::asio::deadline_timer>(io_service_);
+
+	deadline_timers->expires_from_now(boost::posix_time::milliseconds(100)); 
+	deadline_timers->async_wait(boost::bind(&ConnectorImpl::do_connect, this, std::ref(ip), port));
+}
+
+void ConnectorImpl::SendMessage(std::string msg)
+{
+	deadline_timers->expires_from_now(boost::posix_time::milliseconds(100)); 
+	deadline_timers->async_wait(boost::bind(&ConnectorImpl::do_send, this, msg));
+}
+
+void ConnectorImpl::EnableWorkThread()
+{
+	bLoop = true;
+}
+
+void ConnectorImpl::DoWorkThread()
+{
+	if(bLoop)
+	{
+		io_service_.run();
+	}
+}
+
+void ConnectorImpl::do_connect(std::string& ip, int port)
+{
+	std::cout << "prepare connect:ip," << ip <<" port," << port << std::endl;
 	struct sockaddr_in addrSend;
 	memset(&addrSend, 0, sizeof(addrSend));
 	addrSend.sin_family = AF_INET;
@@ -32,8 +60,9 @@ void ConnectorImpl::Connect(std::string& ip, int port)
 	}
 }
 
-void ConnectorImpl::SendMessage(const std::string& msg)
+void ConnectorImpl::do_send(std::string msg)
 {
+	std::cout << "prepare send:" << msg << std::endl;
 	int i = 0;
 	while(true)
 	{
@@ -45,10 +74,6 @@ void ConnectorImpl::SendMessage(const std::string& msg)
 		i++;
 	}
 	close(socket_);
-}
-
-void ConnectorImpl::RecvMessage()
-{
 }
 
 Connector* CreateConnectorObj()
@@ -71,8 +96,10 @@ void ClientSpi::Start()
 	str_ip_ = TARGET_VALUE_IP;
 	nport_ = TARGET_VALUE_PORT;
 
+	connector_->EnableWorkThread();
 	connector_->RegisterSpi(this);
 	connector_->Connect(str_ip_, nport_);
+	connector_->DoWorkThread();
 }
 
 void ClientSpi::OnConnected(int result)
