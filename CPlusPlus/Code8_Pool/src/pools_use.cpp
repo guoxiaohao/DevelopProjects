@@ -64,7 +64,7 @@ void memory_pool_for()
 	int* arr_int[1000];
 	double time_start, time_end;
 	time_start = clock();
-	for(int i=0; i<10000; i++)
+	for(int i=0; i<100000; i++)
 	{
 		for(int j=0; j<1000; j++)
 		{
@@ -81,7 +81,7 @@ void memory_pool_for()
 	MyMemoPool<int, 100> memo_pools;
 	int* arr_ret[1000];
 	time_start = clock();
-	for(int i=0; i<10000; i++)
+	for(int i=0; i<100000; i++)
 	{
 		for(int j=0; j<1000; j++)
 		{
