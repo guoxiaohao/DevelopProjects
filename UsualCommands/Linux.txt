@@ -1,4 +1,4 @@
-ubuntu install£º
+ubuntu install:
 1 deb file:
 sudo dpkg -i XXXX
 2 network command:
