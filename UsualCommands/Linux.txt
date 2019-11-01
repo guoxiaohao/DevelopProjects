@@ -1,9 +1,17 @@
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/guoxiaohao/lib
+
+sources.list path:
+/etc/apt/sources.list
+
 ubuntu install:
 1 deb file:
 sudo dpkg -i XXXX
 2 network command:
 sudo apt-get update
 sudo apt-get install build-essential
+
+ubuntu uninstall:
+sudo apt-get --purge autoremove XXXX
 
 cmake install ubuntu: 
 1 tar -xzvf
@@ -18,6 +26,3 @@ gdb install ubuntu:
   3.1 ./configure
   3.2 make
   3.3 sudo make install
-
-ubuntu uninstall:
-sudo apt-get --purge autoremove XXXX

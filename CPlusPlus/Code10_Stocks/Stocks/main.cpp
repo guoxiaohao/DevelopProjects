@@ -18,11 +18,12 @@ int main(int argc, char* argv[])
     tonghuashun_login api_login = (tonghuashun_login)loads.GetLogin();
     if (api_login)
 	{
-		//nRet = api_login("ifind", "ifind");
-        //std::cout << nRet << std::endl;
+		nRet = api_login("gxh117", "192493");
+        std::cout << nRet << std::endl;
 	}
 
     tonghuashun_logout api_logout = (tonghuashun_logout)loads.GetLogout();
+    api_logout();
     loads.UnInit();
     std::cout << "------ end ------" << std::endl;
     return 0;
