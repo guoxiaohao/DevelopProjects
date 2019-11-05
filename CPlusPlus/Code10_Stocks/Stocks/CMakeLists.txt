@@ -4,8 +4,10 @@ set(ExeName Exe_stocks)
 
 set(sources
     main.cpp 
-    LoadLibra.cpp 
+    StockSortInfo.cpp 
     pch.cpp)
+
+link_libraries(libJson.a)
 
 add_executable(${ExeName} ${sources})
 

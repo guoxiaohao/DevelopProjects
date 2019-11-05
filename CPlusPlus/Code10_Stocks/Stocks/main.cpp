@@ -1,30 +1,17 @@
 #include "pch.h"
 
-extern MyLoadLibrary loads;
+extern guoxh::StockSort MyStockSort;
 
 int main(int argc, char* argv[])
 {
     std::cout << "------ start ------" << std::endl;
-    if(loads.Init())
-    {
-        std::cout << "Load successfully" << std::endl;
-    }
-    else
+
+    if(!MyStockSort.Init("/mnt/d/DevelopEnvir/DevelopProjects/CPlusPlus/Code10_Stocks/Stocks/config/focus.json"))
     {
         std::cout << "Load failed" << std::endl;
     }
+    MyStockSort.DisplayData();
 
-    int nRet;
-    tonghuashun_login api_login = (tonghuashun_login)loads.GetLogin();
-    if (api_login)
-	{
-		nRet = api_login("gxh117", "192493");
-        std::cout << nRet << std::endl;
-	}
-
-    tonghuashun_logout api_logout = (tonghuashun_logout)loads.GetLogout();
-    api_logout();
-    loads.UnInit();
     std::cout << "------ end ------" << std::endl;
     return 0;
 }

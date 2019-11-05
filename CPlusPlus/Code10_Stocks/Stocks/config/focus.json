@@ -1,0 +1,29 @@
+{
+    "industry_def": [
+        { "id": 1, "name": "drinking"},
+        { "id": 2, "name": "finance"},
+        { "id": 3, "name": "food_produce"},
+        { "id": 4, "name": "grain_process"},
+        { "id": 5, "name": "agricluture_hunsbandry_fishing"},
+        { "id": 6, "name": "real_estate"}
+    ],
+    
+    "stocks_def": [
+        { "code": "600059", "name": "古越龙山", "industry":1 },
+        
+        { "code": "601939", "name": "建设银行", "industry":2 },
+        { "code": "601398", "name": "工商银行", "industry":2 },
+
+        { "code": "600597", "name": "光明乳业", "industry":3 },
+        { "code": "600887", "name": "伊利股份", "industry":3 },
+        { "code": "002216", "name": "三全食品", "industry":3 },
+
+        { "code": "600737", "name": "中粮糖业", "industry":4 },
+    
+        { "code": "300106", "name": "西部牧业", "industry":5 },
+        { "code": "300313", "name": "天山生物", "industry":5 },
+
+        { "code": "600848", "name": "上海临港", "industry":6 },
+        { "code": "600266", "name": "北京城建", "industry":6 }
+    ]
+}

@@ -1,3 +1,3 @@
 #include "pch.h"
 
-MyLoadLibrary loads;
+guoxh::StockSort MyStockSort;
